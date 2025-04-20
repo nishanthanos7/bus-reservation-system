@@ -4,6 +4,8 @@
 
 This is the database schema for the **Bus Reservation System**. It contains tables for managing admins, users, operators, buses, routes, trips, bookings, and payments. The system allows users to book bus tickets, view available trips, and handle cancellations due to emergencies like landslides or other disruptions.
 
+##ERD :  https://dbdiagram.io/d/6801549a1ca52373f56c912f
+
 ## Table of Contents
 
 1. [Admins](#admins)
