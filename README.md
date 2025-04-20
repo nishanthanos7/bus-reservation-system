@@ -4,6 +4,20 @@
 
 This is the database schema for the **Bus Reservation System**. It contains tables for managing admins, users, operators, buses, routes, trips, bookings, and payments. The system allows users to book bus tickets, view available trips, and handle cancellations due to emergencies like landslides or other disruptions.
 
+## Table of Contents
+
+1. [Admins](#admins)
+2. [Users](#users)
+3. [Operators](#operators)
+4. [Buses](#buses)
+5. [Routes](#routes)
+6. [Trips](#trips)
+7. [Seats](#seats)
+8. [Bookings](#bookings)
+9. [Payments](#payments)
+10. [Data Flow Process](#data-flow-process)
+
+
 ## Database Tables
 
 ### 1. **Admins**
@@ -141,77 +155,116 @@ The `payments` table stores information about payments for bookings.
 
 ##Dummy data
 
-Admins
-+----+--------------------+-----------+--------------+-------+---------------------+--------+---------------------+---------------------+
-| id | email              | password  | full_name    | role  | last_login          | is_active | created_at          | updated_at          |
-+----+--------------------+-----------+--------------+-------+---------------------+--------+---------------------+---------------------+
-| 1  | admin1@example.com | admin123  | Adam Lambert | ADMIN | 2025-04-20 09:00    | true   | 2025-04-20 09:00    | 2025-04-20 09:00    |
-| 2  | admin2@example.com | admin456  | Eve Smith    | ADMIN | 2025-04-19 08:45    | true   | 2025-04-19 08:45    | 2025-04-19 08:45    |
-| 3  | admin3@example.com | admin789  | John Doe     | ADMIN | 2025-04-18 07:30    | true   | 2025-04-18 07:30    | 2025-04-18 07:30    |
-+----+--------------------+-----------+--------------+-------+---------------------+--------+---------------------+---------------------+
 
-Users
-+----+-------------------+--------------------+------------+-----------+---------------------+--------+---------------------+---------------------+
-| id | full_name         | email              | phone      | password  | last_login          | is_active | created_at          | updated_at          |
-+----+-------------------+--------------------+------------+-----------+---------------------+--------+---------------------+---------------------+
-| 1  | Sisan Baniya      | sisan@gmail.com    | 988223334  | hashed123 | 2025-04-20 10:00    | true   | 2025-04-20 10:00    | 2025-04-20 10:00    |
-| 2  | Nabin Shrestha    | nabin@gmail.com    | 980000111  | pass456   | 2025-04-19 11:30    | true   | 2025-04-19 11:30    | 2025-04-19 11:30    |
-| 3  | Ravi Kumar        | ravi@gmail.com     | 981234567  | secure789 | 2025-04-18 12:00    | true   | 2025-04-18 12:00    | 2025-04-18 12:00    |
-+----+-------------------+--------------------+------------+-----------+---------------------+--------+---------------------+---------------------+
+## Admins
 
-Operators
-+----+-------------------+-------------+---------------------+-------------+-----------+---------------------+---------------------+---------------------+
-| id | name              | contact     | email               | created_by  | is_active | created_at          | updated_at          | logo_url            |
-+----+-------------------+-------------+---------------------+-------------+-----------+---------------------+---------------------+---------------------+
-| 1  | Nepal Deluxe      | 9801111222  | deluxe@bus.com      | 1           | true      | 2025-04-20 09:00    | 2025-04-20 09:00    | NULL                |
-| 2  | Mountain Express  | 9802555444  | mountain@express.com| 2           | true      | 2025-04-19 08:45    | 2025-04-19 08:45    | NULL                |
-| 3  | City Travels      | 9803777888  | city@travels.com    | 1           | true      | 2025-04-18 07:30    | 2025-04-18 07:30    | NULL                |
-+----+-------------------+-------------+---------------------+-------------+-----------+---------------------+---------------------+---------------------+
+The `admins` table stores information about system administrators. These admins are responsible for managing operators, buses, routes, and overall system operations.
 
-Buses
-+----+-----------------+-------------------+-----------+------------+------------+---------------------+---------------------+
-| id | operator_id     | plate_number      | model     | total_seats| created_by | created_at          | updated_at          |
-+----+-----------------+-------------------+-----------+------------+------------+---------------------+---------------------+
-| 1  | 1               | BA 1 JHA 123      | TATA Ace  | 40         | 1          | 2025-04-20 09:00    | 2025-04-20 09:00    |
-| 2  | 2               | BA 2 KTU 456      | Mercedes  | 50         | 2          | 2025-04-19 08:45    | 2025-04-19 08:45    |
-| 3  | 3               | BA 3 MNO 789      | Volvo     | 60         | 1          | 2025-04-18 07:30    | 2025-04-18 07:30    |
-+----+-----------------+-------------------+-----------+------------+------------+---------------------+---------------------+
+| id  | email                | password  | full_name    | role  | last_login         | is_active | created_at         | updated_at         |
+|-----|----------------------|-----------|--------------|-------|--------------------|-----------|--------------------|--------------------|
+| 1   | admin1@example.com   | admin123  | Adam Lambert | ADMIN | 2025-04-20 09:00   | true      | 2025-04-20 09:00   | 2025-04-20 09:00   |
+| 2   | admin2@example.com   | admin456  | Eve Smith    | ADMIN | 2025-04-19 08:45   | true      | 2025-04-19 08:45   | 2025-04-19 08:45   |
+| 3   | admin3@example.com   | admin789  | John Doe     | ADMIN | 2025-04-18 07:30   | true      | 2025-04-18 07:30   | 2025-04-18 07:30   |
 
-Routes
-+----+------------------+-----------------+------------+----------------+-------------+---------------------+---------------------+
-| id | start_location   | end_location   | distance_km| estimated_time | created_by  | created_at          | updated_at          |
-+----+------------------+-----------------+------------+----------------+-------------+---------------------+---------------------+
-| 1  | Kathmandu        | Pokhara         | 200.50     | 6 hours        | 1           | 2025-04-20 09:00    | 2025-04-20 09:00    |
-| 2  | Kathmandu        | Chitwan         | 150.00     | 5 hours        | 2           | 2025-04-19 08:45    | 2025-04-19 08:45    |
-| 3  | Pokhara          | Butwal          | 120.00     | 4 hours        | 1           | 2025-04-18 07:30    | 2025-04-18 07:30    |
-+----+------------------+-----------------+------------+----------------+-------------+---------------------+---------------------+
+---
 
-Trips
-+----+----------+----------+---------------------+---------------------+--------+---------------------+---------------------+-------------------+-------------------+-------------------+
-| id | bus_id   | route_id | departure_time      | arrival_time        | price  | available_seats     | status            | cancellation_reason   | canceled_by    | created_by | created_at          | updated_at          |
-+----+----------+----------+---------------------+---------------------+--------+---------------------+-------------------+------------------------+----------------+------------+---------------------+---------------------+
-| 1  | 1        | 1        | 2025-05-01 08:00    | 2025-05-01 14:00    | 1000   | 38                  | CANCELLED         | Landslide near Mugling | OPERATOR       | 1          | 2025-04-20 09:00    | 2025-04-20 09:00    |
-| 2  | 2        | 2        | 2025-05-02 09:00    | 2025-05-02 14:00    | 900    | 50                  | SCHEDULED         | NULL                   | NULL           | 2          | 2025-04-19 08:45    | 2025-04-19 08:45    |
-| 3  | 3        | 3        | 2025-05-03 10:00    | 2025-05-03 14:00    | 1200   | 60                  | SCHEDULED         | NULL                   | NULL           | 1          | 2025-04-18 07:30    | 2025-04-18 07:30    |
-+----+----------+----------+---------------------+---------------------+--------+---------------------+-------------------+------------------------+----------------+------------+---------------------+---------------------+
+## Users
 
-Seats
-+----+----------+--------------+-----------+
-| id | trip_id  | seat_number  | is_booked |
-+----+----------+--------------+-----------+
-| 1  | 1        | A1           | true      |
-| 2  | 1        | A2           | true      |
-| 3  | 2        | B1           | false     |
-| 4  | 2        | B2           | true      |
-+----+----------+--------------+-----------+
+The `users` table contains the registered users who will book tickets. Each user has a unique ID, and their login credentials and status are tracked.
 
-Bookings
-+----+---------+---------+--------+-----------+-----------------------+------------+---------------------+---------------------+
-| id | user_id | trip_id | seat_id | status    | cancellation_reason   | canceled_by | created_at          | updated_at          |
-+----+---------+---------+--------+-----------+-----------------------+------------+---------------------+---------------------+
-| 1  | 1       | 1       | 1      | CANCELLED | Landslide near Mugling | OPERATOR   | 2025-04-20 09:30    | 2025-04-20 09:31    |
-| 2  | 2       | 2       | 2      | CONFIRMED | NULL                  | NULL       | 2025-04-20 10:00    | 2025-04-20 10:01    |
-| 3  | 3       | 3       | 4      | CONFIRMED | NULL                  | NULL       | 2025-04-20 11:00    | 
+| id  | full_name         | email              | phone      | password  | last_login         | is_active | created_at         | updated_at         |
+|-----|-------------------|--------------------|------------|-----------|--------------------|-----------|--------------------|--------------------|
+| 1   | Sisan Baniya      | sisan@gmail.com    | 988223334  | hashed123 | 2025-04-20 10:00   | true      | 2025-04-20 10:00   | 2025-04-20 10:00   |
+| 2   | Nabin Shrestha    | nabin@gmail.com    | 980000111  | pass456   | 2025-04-19 11:30   | true      | 2025-04-19 11:30   | 2025-04-19 11:30   |
+| 3   | Ravi Kumar        | ravi@gmail.com     | 981234567  | secure789 | 2025-04-18 12:00   | true      | 2025-04-18 12:00   | 2025-04-18 12:00   |
+
+---
+
+## Operators
+
+The `operators` table stores information about bus operators. These operators manage the buses and trips.
+
+| id  | name              | contact     | email               | created_by  | is_active | created_at         | updated_at         | logo_url            |
+|-----|-------------------|-------------|---------------------|-------------|-----------|--------------------|--------------------|---------------------|
+| 1   | Nepal Deluxe      | 9801111222  | deluxe@bus.com      | 1           | true      | 2025-04-20 09:00   | 2025-04-20 09:00   | NULL                |
+| 2   | Mountain Express  | 9802555444  | mountain@express.com| 2           | true      | 2025-04-19 08:45   | 2025-04-19 08:45   | NULL                |
+| 3   | City Travels      | 9803777888  | city@travels.com    | 1           | true      | 2025-04-18 07:30   | 2025-04-18 07:30   | NULL                |
+
+---
+
+## Buses
+
+The `buses` table contains the information about buses used by operators, including bus details and seat count.
+
+| id  | operator_id     | plate_number      | model     | total_seats| created_by | created_at         | updated_at         |
+|-----|-----------------|-------------------|-----------|------------|------------|--------------------|--------------------|
+| 1   | 1               | BA 1 JHA 123      | TATA Ace  | 40         | 1          | 2025-04-20 09:00   | 2025-04-20 09:00   |
+| 2   | 2               | BA 2 KTU 456      | Mercedes  | 50         | 2          | 2025-04-19 08:45   | 2025-04-19 08:45   |
+| 3   | 3               | BA 3 MNO 789      | Volvo     | 60         | 1          | 2025-04-18 07:30   | 2025-04-18 07:30   |
+
+---
+
+## Routes
+
+The `routes` table stores information about bus routes, including start and end locations, distance, and estimated travel time.
+
+| id  | start_location   | end_location   | distance_km| estimated_time | created_by  | created_at         | updated_at         |
+|-----|------------------|----------------|------------|----------------|-------------|--------------------|--------------------|
+| 1   | Kathmandu        | Pokhara         | 200.50     | 6 hours        | 1           | 2025-04-20 09:00   | 2025-04-20 09:00   |
+| 2   | Kathmandu        | Chitwan         | 150.00     | 5 hours        | 2           | 2025-04-19 08:45   | 2025-04-19 08:45   |
+| 3   | Pokhara          | Butwal          | 120.00     | 4 hours        | 1           | 2025-04-18 07:30   | 2025-04-18 07:30   |
+
+---
+
+## Trips
+
+The `trips` table contains trip details, including the bus, route, departure and arrival times, price, available seats, and status (whether the trip is canceled or scheduled).
+
+| id  | bus_id   | route_id | departure_time      | arrival_time        | price  | available_seats     | status            | cancellation_reason   | canceled_by    | created_by | created_at          | updated_at          |
+|-----|----------|----------|---------------------|---------------------|--------|---------------------|-------------------|------------------------|----------------|------------|---------------------|---------------------|
+| 1   | 1        | 1        | 2025-05-01 08:00    | 2025-05-01 14:00    | 1000   | 38                  | CANCELLED         | Landslide near Mugling | OPERATOR       | 1          | 2025-04-20 09:00   | 2025-04-20 09:00   |
+| 2   | 2        | 2        | 2025-05-02 09:00    | 2025-05-02 14:00    | 900    | 50                  | SCHEDULED         | NULL                   | NULL           | 2          | 2025-04-19 08:45   | 2025-04-19 08:45   |
+| 3   | 3        | 3        | 2025-05-03 10:00    | 2025-05-03 14:00    | 1200   | 60                  | SCHEDULED         | NULL                   | NULL           | 1          | 2025-04-18 07:30   | 2025-04-18 07:30   |
+
+---
+
+## Seats
+
+The `seats` table stores the availability of seats for each trip. Each seat can be booked or left unbooked.
+
+| id  | trip_id  | seat_number  | is_booked |
+|-----|----------|--------------|-----------|
+| 1   | 1        | A1           | true      |
+| 2   | 1        | A2           | true      |
+| 3   | 2        | B1           | false     |
+| 4   | 2        | B2           | true      |
+
+---
+
+## Bookings
+
+The `bookings` table stores user bookings for trips, including the status of the booking and cancellation reasons.
+
+| id  | user_id | trip_id | seat_id | status    | cancellation_reason   | canceled_by | created_at         | updated_at         |
+|-----|---------|---------|--------|-----------|-----------------------|-------------|--------------------|--------------------|
+| 1   | 1       | 1       | 1      | CANCELLED | Landslide near Mugling | OPERATOR   | 2025-04-20 09:30   | 2025-04-20 09:31   |
+| 2   | 2       | 2       | 2      | CONFIRMED | NULL                  | NULL        | 2025-04-20 10:00   | 2025-04-20 10:01   |
+| 3   | 3       | 3       | 4      | CONFIRMED | NULL                  | NULL        | 2025-04-20 11:00   | 2025-04-20 11:01   |
+
+---
+
+## Payments
+
+The `payments` table records user payments for bookings, including the method of payment and payment status.
+
+| id  | booking_id | amount | method | payment_time        | status     | created_at         | updated_at         |
+|-----|------------|--------|--------|---------------------|------------|--------------------|--------------------|
+| 1   | 1          | 1000   | Credit | 2025-04-20 09:30    | FAILED     | 2025-04-20 09:30   | 2025-04-20 09:30   |
+| 2   | 2          | 900    | Debit  | 2025-04-20 10:01    | SUCCESS    | 2025-04-20 10:01   | 2025-04-20 10:01   |
+| 3   | 3          | 1200   | Cash   | 2025-04-20 11:01    | SUCCESS    | 2025-04-20 11:01   | 2025-04-20 11:01   |
+
+---
+
 
 
 ## Data Flow
@@ -223,6 +276,15 @@ Bookings
 5. **Payments** are made through various methods and are linked to bookings.
 
 ---
+#Process
+
+1. **User Registration**: A user registers by providing their full name, email, and phone number. This data is stored in the `users` table.
+2. **Search for Routes**: Users search for routes and view available trips based on their desired start and end locations.
+3. **Booking a Seat**: Users select available seats for a trip, which are recorded in the `seats` table and booked in the `bookings` table.
+4. **Payment**: After selecting a seat, users proceed to make payment. The payment status is recorded in the `payments` table.
+5. **Trip Management**: Admins manage trips by assigning buses, routes, and operators. Each trip has a schedule and seat availability.
+6. **Cancellation**: If a trip is canceled, the `trips` table status is updated, and bookings are marked as canceled in the `bookings` table.
+
 
 ## How to Use This Database
 
