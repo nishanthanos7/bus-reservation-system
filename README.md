@@ -294,7 +294,7 @@ The `payments` table records user payments for bookings, including the method of
 2. Add data to the tables using `INSERT` statements or through your application's UI.
 3. Use SQL queries to retrieve data for the bus booking system (e.g., checking available trips, booking seats, viewing payment status).
 
-Feel free to adapt this structure for your specific use case!
+
 
 ---
 
